@@ -14,15 +14,15 @@
  * }
  */
 class Solution {
-    List<Integer>list=new ArrayList<>();
-    public List<Integer> postorderTraversal(TreeNode root) {
-        post(root);
-        return list;
+    public boolean isSymmetric(TreeNode root) {
+        if(root==null) return true;
+        return isSymm(root.left,root.right);
     }
-    public void post(TreeNode root){
-        if(root==null) return;
-        post(root.left);
-        post(root.right);
-        list.add(root.val);
+    boolean isSymm(TreeNode root1,TreeNode root2){
+        if(root1==null||root2==null){
+            return root1==root2;
+        }
+        return (root1.val==root2.val)&&isSymm(root1.left,root2.right)&&isSymm(root1.right,root2.left);
+
     }
 }
