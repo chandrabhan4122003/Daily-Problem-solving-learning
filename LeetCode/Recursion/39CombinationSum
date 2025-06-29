@@ -1,0 +1,19 @@
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+       List<List<Integer>> result=new ArrayList<>();
+       findCombination(0,target,candidates,new ArrayList<>(),result);
+       return result;
+    }
+    public void findCombination(int index,int target,int[]candidates,List<Integer>current,List<List<Integer>>result){
+        if(index==candidates.length||target<0) return;
+        if(target==0) {
+            result.add(new ArrayList<>(current));
+            return;
+        }
+        current.add(candidates[index]); //pick 
+        findCombination(index,target-candidates[index],candidates,current,result);
+        current.remove(current.size()-1);
+        findCombination(index+1,target,candidates,current,result);
+        return;
+    }
+}

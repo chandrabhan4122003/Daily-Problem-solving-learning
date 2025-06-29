@@ -1,0 +1,17 @@
+class Solution {
+  public double myPow(double x, int n) {
+    if (n == 0)
+      return 1.0;
+    long N = n;
+    if (N < 0) {
+      x = 1 / x;
+      N = -N;
+    }
+    double xpn2 = myPow(x, (int) (N / 2));
+    double xn = xpn2 * xpn2;
+    if (N % 2 == 1) {
+      xn = x * xn;
+    }
+    return xn;
+  }
+}

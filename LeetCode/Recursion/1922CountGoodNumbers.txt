@@ -1,0 +1,26 @@
+class Solution {
+    static final int MOD = 1_000_000_007;
+    public int countGoodNumbers(long n) {
+        long evenCount=(n+1)/2;
+        long oddCount=(n)/2;
+        
+        long evenPower=power(5,evenCount);
+        long oddPower=power(4,oddCount);
+
+        return (int)(evenPower*oddPower%MOD);
+
+    }
+    public long power(long x,long y){
+        long result=1;
+        x=x%MOD;
+        while(y>0){
+            if(y%2==1){
+                result=(result*x)%MOD;
+            }
+            x=(x*x)%MOD;
+            y/=2;
+        }
+        return result;
+    }
+    
+}
