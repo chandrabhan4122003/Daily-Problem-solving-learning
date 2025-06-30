@@ -1,0 +1,34 @@
+
+class Solution {
+    static String longestPalindrome(String s) {
+        int l=0;
+        int e=0;
+        int count=0;
+        for(int i=0;i<s.length()-1;i++){
+            for(int j=i+1;j<s.length();j++){
+                boolean check=palindrome(i,j,s);
+                if(check){
+                    if(j-i+1>count){
+                    l=i;
+                    e=j;
+                    count=j-i+1;
+                    }
+                }
+               
+            }
+        }
+        String res=s.substring(l,e+1);
+        return res;
+         
+    }
+    static boolean palindrome(int ss,int e,String s){
+        while(ss<=e){
+            if(s.charAt(ss)!=s.charAt(e)){
+                return false;
+            }
+            ss++;
+            e--;
+        }
+        return true;
+    }
+}
