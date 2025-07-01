@@ -13,7 +13,7 @@ class Solution {
         current.add(candidates[index]); //pick 
         findCombination(index,target-candidates[index],candidates,current,result);
         current.remove(current.size()-1);
-        findCombination(index+1,target,candidates,current,result);
+        findCombination(index+1,target,candidates,current,result); //not pick
         return;
     }
 }

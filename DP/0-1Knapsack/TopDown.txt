@@ -1,0 +1,39 @@
+package DynamicProgramming.KnapSack01;
+
+public class TopDown {
+
+    public int knapSack(int[] wt, int[] val, int W, int n) {
+        int[][] t = new int[W + 1][n + 1];
+
+        // Initialize the base conditions
+        for (int i = 0; i < W + 1; i++) {
+            for (int j = 0; j < n + 1; j++) {  // Correct loop range
+                if (i == 0 || j == 0)
+                    t[i][j] = 0;
+            }
+        }
+
+        // Build table t[][] in bottom-up manner
+        for (int i = 1; i < W + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                if (wt[j - 1] <= i) { // Correct condition
+                    t[i][j] = Math.max(val[j - 1] + t[i - wt[j - 1]][j - 1], t[i][j - 1]);
+                } else {
+                    t[i][j] = t[i][j - 1];
+                }
+            }
+        }
+
+        return t[W][n];  // Final answer
+    }
+
+    public static void main(String[] args) {
+        int[] wt = {1, 3, 4, 5};
+        int[] val = {1, 4, 5, 7};
+        int W = 7;
+
+        TopDown obj = new TopDown();
+        int maxProfit = obj.knapSack(wt, val, W, wt.length);
+        System.out.println("Maximum profit is: " + maxProfit);
+    }
+}
