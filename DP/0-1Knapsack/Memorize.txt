@@ -17,7 +17,7 @@ public class Memorize {
             return dp[n][W] = Math.max(val[n - 1] + knapSackMemo(wt, val, W - wt[n - 1], n - 1),
                     knapSackMemo(wt, val, W, n - 1));
         } else {
-            return dp[n][W] = knapSackMemo(wt, val, W, n - 1);
+            return dp[n][W] = knapSackfMemo(wt, val, W, n - 1);
         }
     }
 
