@@ -1,0 +1,55 @@
+package DynamicProgramming.EqualSumPartition;
+
+public class usingSubsetSumApproach {
+
+    public static boolean checkEqualSum(int[] arr) {
+        int sum = 0;
+        for (int num : arr) {
+            sum += num;
+        }
+
+        // If sum is odd, can't partition into two equal parts
+        if (sum % 2 == 1) {
+            return false;
+        }
+
+        int target = sum / 2;
+        int n = arr.length;
+
+        // Create and initialize DP array
+        int[][] dp = new int[n][target + 1];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= target; j++) {
+                dp[i][j] = -1;
+            }
+        }
+
+        return recursio(arr, target, n, 0, dp);
+    }
+
+    public static boolean recursio(int[] arr, int sum, int n, int idx, int[][] dp) {
+        if (sum == 0) return true;
+        if (idx >= n) return false;
+
+        if (dp[idx][sum] != -1) return dp[idx][sum] == 1;
+
+        boolean pick = false;
+        if (arr[idx] <= sum) {
+            pick = recursio(arr, sum - arr[idx], n, idx + 1, dp);
+        }
+
+        boolean notPick = recursio(arr, sum, n, idx + 1, dp);
+
+        dp[idx][sum] = (pick || notPick) ? 1 : 0;
+        return dp[idx][sum] == 1;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 5, 11, 5};
+        boolean ans = checkEqualSum(arr);
+        System.out.println(ans);  // Expected output: true
+
+        int[] arr2 = {1, 2, 3, 5};
+        System.out.println(checkEqualSum(arr2));  // Expected: false
+    }
+}
