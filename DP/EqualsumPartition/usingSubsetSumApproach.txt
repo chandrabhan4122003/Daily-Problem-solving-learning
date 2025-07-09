@@ -8,7 +8,7 @@ public class usingSubsetSumApproach {
             sum += num;
         }
 
-        // If sum is odd, can't partition into two equal parts
+         equal parts
         if (sum % 2 == 1) {
             return false;
         }
