@@ -1,0 +1,29 @@
+package DynamicProgramming.SubsetSum;
+
+public class Memorize {
+    public static boolean recursio(int[]arr,int sum,int n,int idx,int[][]dp){
+        if(sum==0) return true;
+        if(idx>=n) return false;
+        if(dp[idx][sum]!=-1) return dp[idx][sum]==1;
+        boolean pick=false;
+        if(arr[idx]<=sum){
+            pick=recursio(arr,sum-arr[idx],n,idx+1,dp);
+        }
+        boolean notPick=recursio(arr,sum,n,idx+1,dp);
+        dp[idx][sum]=(pick||notPick)?1:0;
+        return dp[idx][sum]==1;
+    }
+    public static void main(String[] args) {
+        int[]arr={2,3,7,8,10};
+        int sum=11;
+        int n=5;
+        int[][]dp=new int[n][sum+1];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<=sum;j++){
+                dp[i][j]=-1;
+            }
+        }
+        boolean ans=recursio(arr,sum,n,0,dp);
+        System.out.println(ans);
+    }
+}

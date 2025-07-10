@@ -1,0 +1,21 @@
+package DynamicProgramming.SubsetSum;
+
+public class recursion {
+    public static boolean recursio(int[]arr,int sum,int n,int idx){
+        if(sum==0) return true;
+        if(idx>=n) return false;
+
+        boolean pick=false;
+        if(arr[idx]<=sum){
+            pick=recursio(arr,sum-arr[idx],n,idx+1);
+        }
+        boolean notPick=recursio(arr,sum,n,idx+1);
+        return pick||notPick;
+    }
+    public static void main(String[] args) {
+        int[] arr={2,3,7,8,10};
+        int sum=11;
+        boolean ans=recursio(arr,sum,5,0);
+        System.out.println(ans);
+    }
+}
